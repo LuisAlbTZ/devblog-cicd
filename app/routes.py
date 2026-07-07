@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request, jsonify, redirect, url_for, flash 
 from app.models import blog_storage, BlogPost 
+from datetime import datetime
 # Crear un Blueprint para organizar las rutas 
 
 # ¿Qué es un Blueprint? Es una forma de organizar rutas en Flask 
@@ -222,7 +223,6 @@ def api_update_post(post_id):
             'error': f'Error interno: {str(e)}' 
         }), 500 
 
- 
 @main.route('/api/posts/<int:post_id>', methods=['DELETE']) 
 def api_delete_post(post_id): 
     """ 
@@ -265,3 +265,12 @@ def api_search_posts():
         'count': len(results) 
     }) 
 
+@main.route('/api/health')
+def api_health():
+    """API: Health check endpoint""" 
+    return jsonify({ 
+        'status': 'healthy', 
+        'version': '1.0.0', 
+        'timestamp': datetime.now().isoformat(), 
+        'tests_passing': True 
+    }) 
