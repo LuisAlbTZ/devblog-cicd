@@ -31,7 +31,7 @@ def view_post(post_id):
      
     if not post: 
         # Si el post no existe, mostrar error 404 
-        return render_template('404.html'), 404 
+        return render_template('404.html'), 500 
      
     return render_template('post.html', post=post, title=f'{post.title} - DevBlog') 
  
@@ -80,7 +80,6 @@ def create_post():
             flash(f'Error al crear el post: {str(e)}', 'error') 
             return render_template('create_post.html',  title='Crear Nuevo Post - DevBlog', form_data={'title': title, 'content': content, 'author': author}) 
  
-
 @main.route('/search') 
 def search(): 
     """ 
