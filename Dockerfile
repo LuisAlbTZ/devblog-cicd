@@ -29,6 +29,7 @@ LABEL version="1.0"
 # PYTHONDONTWRITEBYTECODE=1: Evita crear archivos .pyc (optimización) 
 ENV PYTHONUNBUFFERED=1 
 ENV PYTHONDONTWRITEBYTECODE=1 
+
 #AGREGAR PARA PRODUCCION  
 ENV FLASK_ENV=production 
 ENV PORT=5000
@@ -84,7 +85,8 @@ USER appuser
 
 # PARA PRODUCCION 
 # Health check 
-HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \ CMD curl -f http://localhost:$PORT/api/health || exit 1
+HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \ 
+    CMD curl -f http://localhost:$PORT/api/health || exit 1
  
 # ================================ 
 # ETAPA 7: CONFIGURACIÓN DE RED 
