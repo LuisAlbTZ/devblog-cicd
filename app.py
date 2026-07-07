@@ -1,3 +1,4 @@
+import os
 from app import create_app 
 from config import Config 
  
@@ -5,6 +6,10 @@ from config import Config
 app = create_app() 
  
 if __name__ == '__main__': 
+    # Configuracion para producción
+    port = int(os.environ.get('PORT', 5000)) 
+    debug = os.environ.get('FLASK_ENV') != 'production' 
+    
     """ 
     Punto de entrada de la aplicación 
      
